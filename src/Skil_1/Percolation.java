@@ -3,11 +3,11 @@ package Skil_1;
 import edu.princeton.cs.algs4.*;
 
 
+
 /**
  * @author Baldur Mar
  * @author Thorgerdur Edda
  * @instructor Magnus Mar Halldorsson
- * <p>
  * Hand-in assignment 1 for T-301-REIR Autumn semester 2016
  * @category School assignment for T-301-REIR, Reykjavik University
  */
@@ -49,8 +49,15 @@ public class Percolation {
 
 
     public void open(int row, int col) { // open the site (row, col) if it is not open already
-        if (grid[row][col] == 0) grid[row][col] = 1;
-        openSites++;
+        if (grid[row][col] == 0) {
+            grid[row][col] = 1;
+            openSites++;
+            /**
+             * Here we need to check if sites adjacent are also open, and union them.
+             * Convert 2D to 1D and
+             */
+        }
+
     }
 
     public boolean isOpen(int row, int col) { // is the site (row, col) open?
@@ -58,6 +65,7 @@ public class Percolation {
     }
 
     public boolean isFull(int row, int col) { // is the site (row, col) full?
+
         return true; // TODO - Perform UnionFind magic
     }
 
@@ -77,9 +85,15 @@ public class Percolation {
      * @return
      */
     public boolean percolates() { // does the system percolate?
+
+
+
         return true; // TODO - Perform UnionFind magic
     }
 
+    private boolean insideBounds(int row, int col){
+        return (row >= 0 && col >=0) && (row < gridSize && col < gridSize);
+    };
 
 }
 
