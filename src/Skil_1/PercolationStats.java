@@ -10,14 +10,14 @@ public class PercolationStats {
 	private static double[] openedSites; 
 	
 	public PercolationStats(int N, int T){ // perform T independent experiments on an N-by-N grid
-		
-		
+
 		if(N <= 0 || T <= 0){
 				throw new IllegalArgumentException();
 		}
 		
 		openedSites = new double[T];
-		
+
+
 		for(int i = 0; i < T; i++){
 			Percolation block = new Percolation(N);
 			while(!block.percolates()){
@@ -25,7 +25,7 @@ public class PercolationStats {
 			}
 			openedSites[i] = block.numberOfOpenSites();
 		}
-		
+
 	}
 	 
 	public double mean(){ // sample mean of percolation threshold
