@@ -17,8 +17,7 @@ public class Percolation {
     private static int[][] grid; // grid[rows][columns]
     private static int gridSize;
     private int openSites;
-    private QuickUnionUF QF;
-    private WeightedQuickUnionUF WQF;
+    private WeightedQuickUnionUF QF;
     private int TOP;
     private int BOTTOM;
 
@@ -41,9 +40,33 @@ public class Percolation {
 
         //System.out.print("END");
 
+        /**
+        PercolationStats statsTester = new PercolationStats(200,100);
+        StdOut.print(statsTester.mean());
+        StdOut.print("\n");
+        StdOut.print(statsTester.stddev());
+        StdOut.print("\n");
+        StdOut.print(statsTester.confidenceHigh());
+        StdOut.print("\n");
+        StdOut.print(statsTester.confidenceLow());
+        **/
 
-        PercolationStats statsTester = new PercolationStats(2,100);
-        System.out.print(statsTester.mean());
+
+        for(int i = 100; i <= 2000; i *=2 ) {
+            Stopwatch timer = new Stopwatch();
+            PercolationStats statsTester = new PercolationStats(i, 100);
+            double time = timer.elapsedTime();
+            StdOut.print("N = " + i + ", T = 100 : " + time +"\n");
+        }
+
+
+        for(int i = 2; i <= 2048; i *= 2) {
+            Stopwatch timer = new Stopwatch();
+            PercolationStats statsTester = new PercolationStats(100, i);
+            double time = timer.elapsedTime();
+            StdOut.print("N = 100, " + "T = " + i +  ": " + time + "\n");
+        }
+
 
     }
 
@@ -70,8 +93,7 @@ public class Percolation {
         BOTTOM = N*N+1;
 
 
-        QF = new QuickUnionUF(N*N + 2 ); // QuickUnion of size N adding 2 spots for top and bottom
-        WQF = new WeightedQuickUnionUF(N*N + 2);
+        QF = new WeightedQuickUnionUF(N*N + 2 ); // QuickUnion of size N adding 2 spots for top and bottom
 
         //Union top TOP = N*N
         for(int i = 0; i < N; i++){
@@ -96,31 +118,31 @@ public class Percolation {
 
         if (!isOpen(row,col)) {
             grid[row][col] = 1;
-            if(QF.connected(convertDimensions(row,col), TOP)) grid[row][col] = 2;
+            //if(QF.connected(convertDimensions(row,col), TOP)) grid[row][col] = 2;
             openSites++;
 
             if(insideBounds(row-1,col) && isOpen(row-1, col)){
                 QF.union(convertDimensions(row-1,col), convertDimensions(row,col));
-                if(grid[row-1][col] == 2) grid[row][col] = 2;
+                //if(grid[row-1][col] == 2) grid[row][col] = 2;
             }
             if(insideBounds(row+1,col) && isOpen(row+1, col)){
                 QF.union(convertDimensions(row+1,col), convertDimensions(row,col));
-                if(grid[row+1][col] == 2) grid[row][col] = 2;
+                //if(grid[row+1][col] == 2) grid[row][col] = 2;
             }
             if(insideBounds(row,col-1) && isOpen(row, col-1)){
                 QF.union(convertDimensions(row, col-1), convertDimensions(row,col));
-                if(grid[row][col-1] == 2) grid[row][col] = 2;
+                //if(grid[row][col-1] == 2) grid[row][col] = 2;
             }
             if(insideBounds(row,col+1) && isOpen(row, col+1)){
                 QF.union(convertDimensions(row, col+1), convertDimensions(row,col));
-                if(grid[row][col+1] == 2) grid[row][col] = 2;
+                //if(grid[row][col+1] == 2) grid[row][col] = 2;
             }
         }
     }
 
     public boolean isOpen(int row, int col) { // is the site (row, col) open?
         if(!insideBounds(row, col)) throw new java.lang.IndexOutOfBoundsException("Site is out of bounds");
-        else return grid[row][col] == 1 || grid[row][col] == 2;
+        else return grid[row][col] == 1 ; // || grid[row][col] == 2
     }
 
     public boolean isFull(int row, int col) { // is the site (row, col) full?

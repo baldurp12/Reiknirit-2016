@@ -1,9 +1,6 @@
 package Skil_1;
 
-import edu.princeton.cs.algs4.StdStats;
-import edu.princeton.cs.algs4.Stopwatch;
-import edu.princeton.cs.algs4.QuickFindUF;
-import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.*;
 
 public class PercolationStats {
 	
@@ -23,8 +20,9 @@ public class PercolationStats {
 			while(!block.percolates()){
 				block.open(StdRandom.uniform(N), StdRandom.uniform(N));
 			}
-			Std
-			openedSites[i] = (block.numberOfOpenSites() / (N*N));
+			double nSquare = N*N;
+            //StdOut.print((block.numberOfOpenSites() / (nSquare)) + "\n");
+			openedSites[i] = (block.numberOfOpenSites() / (nSquare));
 		}
 
 	}
@@ -44,12 +42,17 @@ public class PercolationStats {
 		 * (1.96)*mean() minus 
 		 * java.lang.Math.sqrt(openedSites.length)
 		 */
-		return 0.0;
+
+		return this.mean() -
+                (1.96 * this.stddev()) /
+                        Math.sqrt(openedSites.length);
 	} 
 	 
 	 
-	public double confidenceHigh() { // high end point of 95% confidence interval
-		return 0.0; //TODO 	 
-	}
-	
+	public double confidenceHigh() {
+        return this.mean() +
+                (1.96 * this.stddev()) /
+                        Math.sqrt(openedSites.length);
+
+    }
 }
