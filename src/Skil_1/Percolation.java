@@ -16,7 +16,7 @@ public class Percolation {
 
     private static int[][] grid; // grid[rows][columns]
     private static int gridSize;
-    private static int openSites;
+    private int openSites;
     private QuickUnionUF QF;
     private WeightedQuickUnionUF WQF;
     private int TOP;
@@ -24,18 +24,27 @@ public class Percolation {
 
 
     public static void main(String[] args) {// unit testing (required)
+        /**
+        Percolation tester = new Percolation(1);
+        //tester.open(0,0);
 
-        Percolation tester = new Percolation(3);
-        tester.open(0,0);
-        tester.open(0,1);
-        tester.open(1,1);
-        tester.open(2,1);
-        System.out.print(tester.QF.connected(1,9));
-        System.out.print(tester.QF.connected(9,1));
-        System.out.print(tester.QF.connected(4,9));
+        //tester.open(0,2);
+        //tester.open(1,0);
+
+        StdOut.print(tester.isFull(1,0));
+        //tester.open(1,2);
+
+        //StdOut.print(tester.QF.connected(3,9));
+        //StdOut.print(tester.QF.connected(4,9));
+        StdOut.print(tester.percolates());
+        **/
+
+        //System.out.print("END");
 
 
-        System.out.print("END");
+        PercolationStats statsTester = new PercolationStats(2,100);
+        System.out.print(statsTester.mean());
+
     }
 
     // These functions were provided by the instructor, implementation is a part of the assignment
@@ -83,34 +92,41 @@ public class Percolation {
 
 
     public void open(int row, int col) { // open the site (row, col) if it is not open already
-        if(!insideBounds(row, col)) throw new IllegalArgumentException("Site is out of bounds");
+        if(!insideBounds(row, col)) throw new java.lang.IndexOutOfBoundsException("Site is out of bounds");
 
-        if (isOpen(row,col)) {
+        if (!isOpen(row,col)) {
             grid[row][col] = 1;
+            if(QF.connected(convertDimensions(row,col), TOP)) grid[row][col] = 2;
             openSites++;
 
-            if(isOpen(row-1, col)){
-                QF.union(convertDimensions(row,col), convertDimensions(row-1,col));
+            if(insideBounds(row-1,col) && isOpen(row-1, col)){
+                QF.union(convertDimensions(row-1,col), convertDimensions(row,col));
+                if(grid[row-1][col] == 2) grid[row][col] = 2;
             }
-            if(isOpen(row+1, col)){
-                QF.union(convertDimensions(row,col), convertDimensions(row+1,col));
+            if(insideBounds(row+1,col) && isOpen(row+1, col)){
+                QF.union(convertDimensions(row+1,col), convertDimensions(row,col));
+                if(grid[row+1][col] == 2) grid[row][col] = 2;
             }
-            if(isOpen(row, col-1)){
-                QF.union(convertDimensions(row,col), convertDimensions(row, col-1));
+            if(insideBounds(row,col-1) && isOpen(row, col-1)){
+                QF.union(convertDimensions(row, col-1), convertDimensions(row,col));
+                if(grid[row][col-1] == 2) grid[row][col] = 2;
             }
-            if(isOpen(row, col+1)){
-                QF.union(convertDimensions(row,col), convertDimensions(row, col+1));
+            if(insideBounds(row,col+1) && isOpen(row, col+1)){
+                QF.union(convertDimensions(row, col+1), convertDimensions(row,col));
+                if(grid[row][col+1] == 2) grid[row][col] = 2;
             }
         }
     }
 
     public boolean isOpen(int row, int col) { // is the site (row, col) open?
-        if(!insideBounds(row, col)) throw new IllegalArgumentException("Site is out of bounds");
-        else return grid[row][col] == 1;
+        if(!insideBounds(row, col)) throw new java.lang.IndexOutOfBoundsException("Site is out of bounds");
+        else return grid[row][col] == 1 || grid[row][col] == 2;
     }
 
     public boolean isFull(int row, int col) { // is the site (row, col) full?
-        return true; // TODO - Perform UnionFind magic
+        if(!insideBounds(row, col)) throw new java.lang.IndexOutOfBoundsException("Site is out of bounds");
+        //return (isOpen(row,col) && grid[row][col] == 2);
+        return (isOpen(row,col) && QF.connected(convertDimensions(row,col), TOP));
     }
 
     /**
@@ -125,7 +141,8 @@ public class Percolation {
 
 
     public boolean percolates() { // does the system percolate?
-        return QF.connected(TOP,BOTTOM) || QF.connected(BOTTOM, TOP);
+
+        return QF.connected(TOP,BOTTOM) && numberOfOpenSites()>0;
     }
 
     private boolean insideBounds(int row, int col){

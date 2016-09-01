@@ -7,7 +7,7 @@ import edu.princeton.cs.algs4.StdRandom;
 
 public class PercolationStats {
 	
-	private static double[] openedSites; 
+	private static double[] openedSites;
 	
 	public PercolationStats(int N, int T){ // perform T independent experiments on an N-by-N grid
 
@@ -23,7 +23,8 @@ public class PercolationStats {
 			while(!block.percolates()){
 				block.open(StdRandom.uniform(N), StdRandom.uniform(N));
 			}
-			openedSites[i] = block.numberOfOpenSites();
+			Std
+			openedSites[i] = (block.numberOfOpenSites() / (N*N));
 		}
 
 	}
