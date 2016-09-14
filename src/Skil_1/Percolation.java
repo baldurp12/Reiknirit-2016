@@ -51,16 +51,16 @@ public class Percolation {
         StdOut.print(statsTester.confidenceLow());
         **/
 
-
-        for(int i = 100; i <= 2000; i *=2 ) {
+/**
+        for(int i = 100; i <= 3200; i *=2 ) {
             Stopwatch timer = new Stopwatch();
             PercolationStats statsTester = new PercolationStats(i, 100);
             double time = timer.elapsedTime();
             StdOut.print("N = " + i + ", T = 100 : " + time +"\n");
         }
+**/
 
-
-        for(int i = 2; i <= 2048; i *= 2) {
+        for(int i = 100; i <= 150000; i *= 2) {
             Stopwatch timer = new Stopwatch();
             PercolationStats statsTester = new PercolationStats(100, i);
             double time = timer.elapsedTime();
