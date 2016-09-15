@@ -23,6 +23,7 @@ public class PointPlotter {
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
         StdDraw.show(0);
+        StdDraw.setPenRadius(5);
 
         // read in the input
         String filename = args[0];
