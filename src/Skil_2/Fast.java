@@ -10,9 +10,11 @@ public class Fast {
 
         int len = points.length;
 
+
         for(int i = 0; i < len; i++){
             Point p = points[i];
             Point[] orginalList = points.clone();
+
 
             Arrays.sort(orginalList, i, len, p.SLOPE_ORDER);
             int counter = 0;
@@ -24,7 +26,7 @@ public class Fast {
                 if (currentPoint == findSlope) {
                     counter++;
                 }
-                else {
+                else{
                     if (counter >= 2) {
                         StdOut.print(p);
 
@@ -33,12 +35,15 @@ public class Fast {
                         }
                         StdOut.println();
                     }
-                    counter = 0;
-                    findSlope = currentPoint;
+                counter = 0;
+                findSlope = currentPoint;
+
                 }
+
             }
-        }
-    }
+
+
+        }}
 
     public static void main(String[] args) {
 
