@@ -30,14 +30,24 @@ public class SAP {
         }
     }
 
-
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) throws IndexOutOfBoundsException{
+
         return -1;
     }
 
     // a shortest common common ancestor of v and w; -1 if no such path
     public int ancestor(int v, int w) throws IndexOutOfBoundsException{
+        BreadthFirstDirectedPaths g1 = new BreadthFirstDirectedPaths(digraph, v);
+        BreadthFirstDirectedPaths g2 = new BreadthFirstDirectedPaths(digraph, w);
+
+        for(int i = 0; i < digraph.V(); i++){
+
+        }
+
+        if(v < 0 || w < 0 || v >= digraph.V() || w >= digraph.V()){
+            throw new IndexOutOfBoundsException("out of bounds");
+        }
         return -1;
     }
 
@@ -57,9 +67,15 @@ public class SAP {
         Digraph digraph = new Digraph(in);
         try {
             SAP s = new SAP(digraph);
+            s.ancestor(1,3);
+
         }
         catch (IllegalArgumentException ie) {
             System.out.println(ie);
+        }
+
+        catch (IndexOutOfBoundsException ibe){
+            System.out.println(ibe);
         }
 
         Bag<Integer> hypernyms = new Bag<Integer>();

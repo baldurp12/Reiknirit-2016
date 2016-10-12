@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07bde5dd-5d04-4ab3-bd4f-fbb22e6cccc4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/Skil_4/wordnet/digraphs/digraph3.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/Skil_4/wordnet/digraphs/digraph5.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Reiknirit-2016/Skil_4/SAP.class" afterPath="$PROJECT_DIR$/out/production/Reiknirit-2016/Skil_4/SAP.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Skil_4/SAP.java" afterPath="$PROJECT_DIR$/src/Skil_4/SAP.java" />
     </list>
     <ignored path="Reiknirit-2016.iws" />
@@ -37,10 +33,10 @@
       <file leaf-file-name="SAP.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Skil_4/SAP.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="27" column="57" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+            <state relative-caret-position="285">
+              <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
               <folding>
-                <element signature="e#1989#1998#0" expanded="true" />
+                <element signature="e#2481#2490#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -954,12 +950,12 @@
       <workItem from="1475173573671" duration="3411000" />
       <workItem from="1475604025938" duration="22000" />
       <workItem from="1476268394884" duration="4018000" />
-      <workItem from="1476279560673" duration="8439000" />
+      <workItem from="1476279560673" duration="9855000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17745000" />
+    <option name="totallyTimeSpent" value="19161000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="52" width="1366" height="678" extended-state="0" />
@@ -1314,10 +1310,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Skil_4/SAP.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="27" column="57" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+        <state relative-caret-position="285">
+          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
           <folding>
-            <element signature="e#1989#1998#0" expanded="true" />
+            <element signature="e#2481#2490#0" expanded="true" />
           </folding>
         </state>
       </provider>
