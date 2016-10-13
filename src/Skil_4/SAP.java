@@ -1,6 +1,12 @@
 package Skil_4;
 
 import edu.princeton.cs.algs4.*;
+import org.omg.CORBA.OBJ_ADAPTER;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class SAP {
@@ -30,35 +36,120 @@ public class SAP {
         }
     }
 
+    public int getlength(Object v, Object w){
+        BreadthFirstDirectedPaths graphV;
+        BreadthFirstDirectedPaths graphW;
+
+        if (v instanceof Integer){
+             graphV = new BreadthFirstDirectedPaths(digraph,(Integer)v);
+             graphW = new BreadthFirstDirectedPaths(digraph,(Integer)w);
+        }
+        else{
+
+             graphV = new BreadthFirstDirectedPaths(digraph, (Iterable<Integer>)v);
+             graphW = new BreadthFirstDirectedPaths(digraph, (Iterable<Integer>)w);
+        }
+
+        int min = Integer.MAX_VALUE;
+        boolean isPath = false;
+
+        for(int i = 0; i < digraph.V(); i++) {
+
+            if (graphV.hasPathTo(i) && graphW.hasPathTo(i)) {
+                isPath = true;
+                int dist = graphV.distTo(i) + graphW.distTo(i);
+                if (dist < min){
+                    min = dist;
+                }
+            }
+        }
+
+        if (isPath){
+            return min;
+        }
+        return -1;
+    }
+
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) throws IndexOutOfBoundsException{
+        if(v < 0 || w < 0 || v >= digraph.V() || w >= digraph.V()){
+            throw new IndexOutOfBoundsException("out of bounds");
+        }
+        return getlength(v,w);
+    }
+
+    public int getAncestor(Object v, Object w){
+        BreadthFirstDirectedPaths graphV;
+        BreadthFirstDirectedPaths graphW;
+
+        if (v instanceof Integer){
+            graphV = new BreadthFirstDirectedPaths(digraph,(Integer)v);
+            graphW = new BreadthFirstDirectedPaths(digraph,(Integer)w);
+        }
+        else{
+
+            graphV = new BreadthFirstDirectedPaths(digraph, (Iterable<Integer>)v);
+            graphW = new BreadthFirstDirectedPaths(digraph, (Iterable<Integer>)w);
+        }
+        int ancestor = 0;
+        int min = Integer.MAX_VALUE;
+        boolean isPath = false;
+
+        for(int i = 0; i < digraph.V(); i++){
+
+            if (graphV.hasPathTo(i) && graphW.hasPathTo(i)){
+                isPath = true;
+                int dist = graphV.distTo(i) + graphW.distTo(i);
+
+                if (dist < min){
+                    ancestor = i;
+                    min = dist;
+                }
+            }
+        }
+        if(isPath){
+            return ancestor;
+        }
 
         return -1;
     }
 
     // a shortest common common ancestor of v and w; -1 if no such path
     public int ancestor(int v, int w) throws IndexOutOfBoundsException{
-        BreadthFirstDirectedPaths g1 = new BreadthFirstDirectedPaths(digraph, v);
-        BreadthFirstDirectedPaths g2 = new BreadthFirstDirectedPaths(digraph, w);
-
-        for(int i = 0; i < digraph.V(); i++){
-
-        }
-
         if(v < 0 || w < 0 || v >= digraph.V() || w >= digraph.V()){
             throw new IndexOutOfBoundsException("out of bounds");
         }
-        return -1;
+        return getAncestor(v, w);
     }
 
     // length of shortest ancestral path of vertex subsets A and B; -1 if no such path
     public int length(Iterable<Integer> A, Iterable<Integer> B) throws IndexOutOfBoundsException{
-        return -1;
+        for (int i : A){
+            if (i < 0 || i >= digraph.V()){
+                throw new IndexOutOfBoundsException();
+            }
+        }
+        for (int i : B){
+            if (i < 0 || i >= digraph.V()){
+                throw new IndexOutOfBoundsException();
+            }
+        }
+       return getlength(A,B);
     }
 
     // a shortest common ancestor of vertex subsets A and B; -1 if no such path
     public int ancestor(Iterable<Integer> A, Iterable<Integer> B) throws IndexOutOfBoundsException{
-        return -1;
+        for (int i : A){
+            if (i < 0 || i >= digraph.V()){
+                throw new IndexOutOfBoundsException();
+            }
+        }
+        for (int i : B){
+            if (i < 0 || i >= digraph.V()){
+                throw new IndexOutOfBoundsException();
+            }
+        }
+        return getAncestor(A, B);
     }
 
     // do unit testing of this class
@@ -67,19 +158,26 @@ public class SAP {
         Digraph digraph = new Digraph(in);
         try {
             SAP s = new SAP(digraph);
-            s.ancestor(1,3);
+            System.out.println("ancestor = " + s.ancestor(6,2)); //0
+            System.out.println("ancestor = " + s.ancestor(8,11)); //5
+            System.out.println("length = " + s.length(6,2)); //4
+            System.out.println("length = " + s.length(8,11)); //3
+            Integer v[] = {3,8,6,1};
+            Integer w[] = {10,2};
+            List<Integer> vlist = Arrays.asList(v);
+            List<Integer> wlist = Arrays.asList(w);
+
+            System.out.println("length = " + s.length(vlist,wlist)); //2
+            System.out.println("ancestor = " + s.ancestor(vlist,wlist)); //0
 
         }
-        catch (IllegalArgumentException ie) {
-            System.out.println(ie);
+        catch (IllegalArgumentException e) {
+            System.out.println(e);
         }
 
-        catch (IndexOutOfBoundsException ibe){
-            System.out.println(ibe);
+        catch (IndexOutOfBoundsException e){
+            System.out.println(e);
         }
-
-        Bag<Integer> hypernyms = new Bag<Integer>();
-
 
     }
 
