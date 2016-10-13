@@ -18,6 +18,9 @@ public class SAP {
         if(cycle.hasCycle()){
             throw new IllegalArgumentException("Graph is not acyclic");
         }
+        else{
+            System.out.println();
+        }
         int counted = 0;
         for( int i = 0; i < digraph.V(); i++){
             if(digraph.outdegree(i) ==0){
@@ -49,6 +52,7 @@ public class SAP {
                 if (dist < min){
                     min = dist;
                 }
+
             }
         }
 
