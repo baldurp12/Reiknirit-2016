@@ -41,7 +41,7 @@ public class Outcast {
     }
 
     public static void main ( String [] argss ) {
-
+        //breyta skram..eda laga og stytta slodina
         String [] args = { "/Users/thorgerdureiriksdottir/Desktop/Reikni/Reiknirit-2016/lib/Skil_4/wordnet/synsets/synsets.txt",
                            "/Users/thorgerdureiriksdottir/Desktop/Reikni/Reiknirit-2016/lib/Skil_4/wordnet/hypernyms/hypernyms.txt",
                            "/Users/thorgerdureiriksdottir/Desktop/Reikni/Reiknirit-2016/lib/Skil_4/wordnet/outcasts/outcast5.txt", //table
