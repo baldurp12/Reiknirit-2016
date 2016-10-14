@@ -106,62 +106,32 @@ public class WordNet {
 
      // do unit testing of this class
      public static void main ( String [] args ){
-         String synsetsFile = "C:\\Users\\Baldur\\Dropbox\\Bs.C-Hugb\\5.onn\\reir\\Reiknirit-2016\\lib\\Skil_4\\wordnet\\synsets\\synsets6.txt";
-         String hypernymsFile = "C:\\Users\\Baldur\\Dropbox\\Bs.C-Hugb\\5.onn\\reir\\Reiknirit-2016\\lib\\Skil_4\\wordnet\\hypernyms\\hypernyms6TwoAncestors.txt";
+         Stopwatch timer = new Stopwatch();
+
+         String synsetsFile = "C:\\Users\\Baldur\\Dropbox\\Bs.C-Hugb\\5.onn\\reir\\Reiknirit-2016\\lib\\Skil_4\\wordnet\\synsets\\synsets.txt";
+         String hypernymsFile = "C:\\Users\\Baldur\\Dropbox\\Bs.C-Hugb\\5.onn\\reir\\Reiknirit-2016\\lib\\Skil_4\\wordnet\\hypernyms\\hypernyms300K.txt";
 
          WordNet newNet = new WordNet(synsetsFile, hypernymsFile);
-
-         /**
-          * List all vertices in the Digraph
-          */
-         StdOut.println(newNet.digraph);
 
          /**
           * Check if {@method contains} works
           */
          StdOut.println("Contains 'Baldur'" + newNet.isNoun("Baldur"));
-         StdOut.println("Contains 'beta_globulin'" + newNet.isNoun("beta_globulin"));
+         StdOut.println("Contains 'industry'" + newNet.isNoun("industry"));
 
          /**
           * sap tests
           */
 
-         StdOut.println(newNet.sap("a", "a"));
-         StdOut.println(newNet.sap("a", "b"));
-         StdOut.println(newNet.sap("a", "c"));
-         StdOut.println(newNet.sap("a", "d"));
-         StdOut.println(newNet.sap("a", "e"));
-         StdOut.println(newNet.sap("a", "f"));
-         StdOut.println(newNet.sap("b", "a"));
-         StdOut.println(newNet.sap("b", "b"));
-         StdOut.println(newNet.sap("b", "c"));
-         StdOut.println(newNet.sap("b", "d"));
-         StdOut.println(newNet.sap("b", "e"));
-         StdOut.println(newNet.sap("b", "f"));
-         StdOut.println(newNet.sap("c", "a"));
-         StdOut.println(newNet.sap("c", "b"));
-         StdOut.println(newNet.sap("c", "c"));
-         StdOut.println(newNet.sap("c", "d"));
-         StdOut.println(newNet.sap("c", "e"));
-         StdOut.println(newNet.sap("c", "f"));
-         StdOut.println(newNet.sap("d", "a"));
-         StdOut.println(newNet.sap("d", "b"));
-         StdOut.println(newNet.sap("d", "c"));
-         StdOut.println(newNet.sap("d", "d"));
-         StdOut.println(newNet.sap("d", "e"));
-         StdOut.println(newNet.sap("d", "f"));
-         StdOut.println(newNet.sap("e", "a"));
-         StdOut.println(newNet.sap("e", "b"));
-         StdOut.println(newNet.sap("e", "c"));
-         StdOut.println(newNet.sap("e", "d"));
-         StdOut.println(newNet.sap("e", "e"));
-         StdOut.println(newNet.sap("e", "f"));
-         StdOut.println(newNet.sap("f", "a"));
-         StdOut.println(newNet.sap("f", "b"));
-         StdOut.println(newNet.sap("f", "c"));
-         StdOut.println(newNet.sap("f", "d"));
-         StdOut.println(newNet.sap("f", "e"));
-         StdOut.println(newNet.sap("f", "f"));
+         StdOut.println(newNet.sap("royal_purple", "unsoundness"));
+
+         double time = timer.elapsedTime();
+
+         StdOut.println("Time elapsed: " + time);
+
+
+
+
 
      }
 }
