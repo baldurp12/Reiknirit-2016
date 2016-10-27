@@ -1,10 +1,7 @@
 package Skil_4;
 
 import edu.princeton.cs.algs4.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 
 
 public class SAP {
