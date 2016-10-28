@@ -2,7 +2,10 @@
 // 11 October 2016, Magnus M. Halldorsson
 package Skil_5;
 
+import edu.princeton.cs.algs4.BinaryIn;
+import edu.princeton.cs.algs4.BinaryOut;
 import edu.princeton.cs.algs4.Huffman;
+import edu.princeton.cs.algs4.Stopwatch;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,12 +15,12 @@ public class Tester {
 
 	public static void main(String[] args) throws FileNotFoundException {
 
-
+		Stopwatch t = new Stopwatch();
 		// Apply Huffman decoding; requires stdin/stdout
 		String huf = args[0];
 		try{
-			System.setIn(new FileInputStream(args[0]));
-			System.setOut(new PrintStream(huf));
+			System.setIn(new FileInputStream(huf));
+			System.setOut(new PrintStream(huf + ".exHuf"));
 		}
 		catch (RuntimeException e){
 			e.getMessage();
@@ -25,9 +28,20 @@ public class Tester {
 
 		Huffman.expand();
 
+		BinaryIn in = new BinaryIn((huf + ".exHuf"));
+		BinaryOut out = new BinaryOut((huf + ".reMTF"));
+		MoveToFront.decode(in,out);
+
+		out.close();
+
+		in = new BinaryIn((huf + ".reMTF"));
+		String bw = args[0] + ".final.txt";
+		out = new BinaryOut(bw);
+		BurrowsWheeler.inverseTransform(in, out);
+		out.close();
 
 
-
+		System.err.println("Time spent decompressing " + args[0] +" : " + t.elapsedTime());
 		/*
 		if (args.length < 1) {
 		    StdOut.println("Usage: java Tester <filename>");

@@ -4,7 +4,7 @@
 package Skil_5;
 
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdOut;
+
 import static edu.princeton.cs.algs4.QuickX.sort;
 
 public class CircularSuffixArray {
@@ -23,11 +23,9 @@ public class CircularSuffixArray {
                 circularSuffixArray[i] = new CircularSuffix(s, i);
             }
 		}
-
 		//edu.princeton.cs.algs4.QuickX.sort;
 		sort(circularSuffixArray);
 	}
-
 
     /**
      * Returns the length of the input string.
@@ -47,8 +45,9 @@ public class CircularSuffixArray {
      */
 	public int index(int i) // returns index of ith sorted suffix
 	{
-	    if(i < 0 || i >= this.length()) throw new IndexOutOfBoundsException();
-
+	    if(i < 0 || i >= this.length()){
+			throw new IndexOutOfBoundsException();
+	    }
         return circularSuffixArray[i].suffixIndex;
 	}
 
@@ -60,7 +59,6 @@ public class CircularSuffixArray {
 			this.referenceInput = s;
             this.suffixIndex = startIndex;
 		}
-
 
         /*
             Same principles as used in algs4.jar SuffixArray.java
@@ -106,7 +104,7 @@ public class CircularSuffixArray {
 	   String pair = s + s;
 	   CircularSuffixArray suffix = new CircularSuffixArray(s);
 
-
+/*
 	   StdOut.println("  i ind select");
 	   StdOut.println("-------------------");
 	   
@@ -115,6 +113,7 @@ public class CircularSuffixArray {
 	       String ith = "\"" + pair.substring(index, index+Math.min(index + 50, s.length())) + "\"";
 	       StdOut.printf("%3d %3d %s %s %s\n", i, index, ith, suffix.circularSuffixArray[i].getLastChar(), suffix.circularSuffixArray[i].getFirstChar());
 	   }
+	   */
 	}	
 
 }

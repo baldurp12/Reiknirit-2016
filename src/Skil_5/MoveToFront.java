@@ -20,7 +20,6 @@ public class MoveToFront {
 			asciiArray = mtf(asciiArray, currChar, index);
 			out.write(index);
 		}
-
 	}
 
 	// apply move-to-front decoding
